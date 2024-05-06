@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; // Importe o banco de dados do Firebase
+import { getDatabase } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
 
 
 
@@ -15,9 +15,10 @@ const firebaseConfig = {
 
 
 
-console.log("Funciona!!!!!")
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 export { firebaseConfig };
+
+console.log("Funciona PORRRRRRRRRRAAAAA!!!!!")
