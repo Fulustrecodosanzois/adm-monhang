@@ -26,15 +26,21 @@ get(child(ref(db), "formulario")).then((snapshot) => {
 
             const itemContent = `
         <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1">${mensagem.nome}</h5>
-          <small>${dataHoraEnvio}</small>
+          <h5 class="mb-3 me-5">Nome: ${mensagem.nome}</h5>
+          <small class="fw-bold">${dataHoraEnvio}</small>
         </div>
-        <p class="mb-1">${mensagem.assunto}</p>
-        <small>${mensagem.mensagem}</small>
+        <p class="mb-2">Email: ${mensagem.email}</p>
+        <p class="mb-2">Telefone: ${mensagem.telefone}</p>
+        <p class="mb-3">Assunto: ${mensagem.assunto}</p>
+
+        <div class="bg-primary rounded-3 p-3">
+         <small  class="text-white fw-bolder">${mensagem.mensagem}</small>
+        </div>
+
       `;
             listItem.innerHTML = itemContent;
 
-            lista.appendChild(listItem); // Adiciona o item à lista
+            lista.appendChild(listItem); 
         }
     } else {
         console.log("Não há dados disponíveis");
