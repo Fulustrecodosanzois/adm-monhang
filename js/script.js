@@ -1,40 +1,17 @@
-import firebase from "./firebase-config.js";
+import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; 
 
-const database = firebase.database();
-const listaDiv = document.getElementById('lista');
-const mensagemDiv = document.getElementById('mensagem');
-
-function exibirMensagens(mensagens) {
-    listaDiv.innerHTML = '';
-
-    mensagens.forEach((mensagem, index) => {
-        const mensagemElement = document.createElement('div');
-        mensagemElement.innerHTML = `
-            <div class="mensagem" data-index="${index}">
-                <h3>${mensagem.nome}</h3>
-                <p>Assunto: ${mensagem.assunto}</p>
-                <p>Data e Hora: ${mensagem.dataHoraEnvio}</p>
-            </div>
-        `;
-        listaDiv.appendChild(mensagemElement);
-
-        mensagemElement.addEventListener('click', () => exibirDetalhesMensagem(mensagem));
-    });
-}
-
-function exibirDetalhesMensagem(mensagem) {
-    mensagemDiv.innerHTML = `
-        <h2>${mensagem.nome}</h2>
-        <p><strong>Assunto:</strong> ${mensagem.assunto}</p>
-        <p><strong>Mensagem:</strong> ${mensagem.mensagem}</p>
-        <p><strong>Data e Hora:</strong> ${mensagem.dataHoraEnvio}</p>
-    `;
-}
-
-database.ref('formulario').on('value', (snapshot) => {
-    const mensagens = [];
-    snapshot.forEach((childSnapshot) => {
-        mensagens.push(childSnapshot.val());
-    });
-    exibirMensagens(mensagens);
+const db = getDatabase();
+const dbRef = ref(db);
+get(child(dbRef, "formulario")).then((snapshot) => {
+  if (snapshot.exists()) {
+    const formulario = snapshot.val();
+    for (const key in formulario) {
+      const mensagem = formulario[key];
+      lista.innerHTML += `<li>${mensagem.nome}: ${mensagem.assunto}</li>`;
+    }
+  } else {
+    console.log("Não há dados disponíveis");
+  }
+}).catch((error) => {
+  console.error(error);
 });

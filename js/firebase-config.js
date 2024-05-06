@@ -1,5 +1,7 @@
-import firebase from "firebase/app";
-import "firebase/database";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js"; // Importe o banco de dados do Firebase
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBQGVTy0cZXc4HO3MzO4_S6mtMBdhbCzVE",
@@ -11,10 +13,11 @@ const firebaseConfig = {
   appId: "1:627165670566:web:3477f3251f771b9311d867"
 };
 
+
+
 console.log("Funciona!!!!!")
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getDatabase();
 
-export default firebase;
-
-
+export { firebaseConfig };
